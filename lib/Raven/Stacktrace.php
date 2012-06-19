@@ -15,11 +15,12 @@ class Raven_Stacktrace
                 if (isset($frame['class'])) {
                     $context['line'] = sprintf('%s%s%s(%s)',
                         $frame['class'], $frame['type'], $frame['function'],
-                        $frame['args']);
+                        self::arg_array_to_string($frame['args']));
                 }
                 else {
                     $context['line'] = sprintf(
-                        '%s(%s)', $frame['function'], $frame['args']);
+                        '%s(%s)', $frame['function'],
+                        self::arg_array_to_string($frame['args']));
                 }
                 $abs_path = '';
                 $context['prefix'] = '';
@@ -52,6 +53,10 @@ class Raven_Stacktrace
             ));
         }
         return array_reverse($result);
+    }
+
+    private static function arg_array_to_string($args_arr) {
+        return var_export($args_arr, TRUE);
     }
 
     private static function read_source_file($filename, $lineno)
