@@ -215,7 +215,8 @@ class Raven_Client
         for ($i = 0; $i < count($stack) - 1; $i++) {
             $stack[$i]['function'] = $stack[$i + 1]['function'];
         }
-        $stack[count($stack) - 1]['function'] = null;
+        if ($stack)
+          $stack[count($stack) - 1]['function'] = null;
 
         if ($stack && !isset($data['sentry.interfaces.Stacktrace'])) {
             $data['sentry.interfaces.Stacktrace'] = array(
