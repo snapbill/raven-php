@@ -57,7 +57,7 @@ class Raven_Stacktrace
 
     private static function get_args($frame) {
         if (isset($frame['args']))
-            return var_export($args_arr, TRUE);
+            return var_export($frame['args'], TRUE);
         else
             return '';
     }
