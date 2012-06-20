@@ -52,7 +52,7 @@ class Raven_Stacktrace
 
             ));
         }
-        return array_reverse($result);
+        return $result;
     }
 
     private static function get_args($frame) {
