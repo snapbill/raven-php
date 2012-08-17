@@ -252,7 +252,7 @@ class Raven_Client
         }
     }
 
-    private function send_remote($url, $data, $headers=array())
+    protected function send_remote($url, $data, $headers=array())
     {
         $parts = parse_url($url);
         $parts['netloc'] = $parts['host'].(isset($parts['port']) ? ':'.$parts['port'] : null);
