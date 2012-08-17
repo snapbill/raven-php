@@ -20,12 +20,10 @@ class Raven_Stacktrace
                 if (isset($frame['class'])) {
                     $context['line'] = sprintf('%s%s%s(%s)',
                         $frame['class'], $frame['type'], $frame['function'],
-                        self::get_args($frame));
+                        $args);
                 }
                 else {
-                    $context['line'] = sprintf(
-                        '%s(%s)', $frame['function'],
-                        self::get_args($frame));
+                    $context['line'] = sprintf('%s(%s)', $frame['function'], $args);
                 }
                 $abs_path = '';
                 $context['prefix'] = '';
