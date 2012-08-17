@@ -11,7 +11,12 @@ class Raven_Stacktrace
         $result = array();
         foreach($stack as $frame) {
             if (!isset($frame['file'])) {
-
+                if (isset($frame['args'])) {
+                    $args = (is_array($frame['args']) ? implode(',', $frame['args']) : $frame['args']);
+                }
+                else {
+                    $args = array();
+                }
                 if (isset($frame['class'])) {
                     $context['line'] = sprintf('%s%s%s(%s)',
                         $frame['class'], $frame['type'], $frame['function'],
