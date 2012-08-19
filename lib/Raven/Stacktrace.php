@@ -12,10 +12,10 @@ class Raven_Stacktrace
         foreach($stack as $frame) {
             if (!isset($frame['file'])) {
                 if (isset($frame['args'])) {
-                    $args = (is_array($frame['args']) ? implode(',', $frame['args']) : $frame['args']);
+                    $args = var_export($frame['args'], True);
                 }
                 else {
-                    $args = array();
+                    $args = '';
                 }
                 if (isset($frame['class'])) {
                     $context['line'] = sprintf('%s%s%s(%s)',
@@ -56,13 +56,6 @@ class Raven_Stacktrace
             ));
         }
         return $result;
-    }
-
-    private static function get_args($frame) {
-        if (isset($frame['args']))
-            return var_export($frame['args'], TRUE);
-        else
-            return '';
     }
 
     private static function read_source_file($filename, $lineno)
