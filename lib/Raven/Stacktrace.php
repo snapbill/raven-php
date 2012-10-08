@@ -12,7 +12,7 @@ class Raven_Stacktrace
         foreach($stack as $frame) {
             if (!isset($frame['file'])) {
                 if (isset($frame['args'])) {
-                    $args = var_export($frame['args'], True);
+                    $args = Dump::plaintext($frame['args']);
                 }
                 else {
                     $args = '';
