@@ -172,8 +172,7 @@ class Raven_Client
 
     public function capture($data, $stack)
     {
-        $event_id = $this->uuid4();
-
+        if (!isset($data['event_id'])) $data['event_id'] = $this->uuid4();
         if (!isset($data['timestamp'])) $data['timestamp'] = gmdate('Y-m-d\TH:i:s\Z');
         if (!isset($data['level'])) $data['level'] = self::ERROR;
 
@@ -186,7 +185,6 @@ class Raven_Client
 
         $data = array_merge($data, array(
             'server_name' => $this->name,
-            'event_id' => $event_id,
             'project' => $this->project,
             'site' => $this->site,
             'sentry.interfaces.Http' => array(
@@ -230,7 +228,7 @@ class Raven_Client
 
         $this->send($data);
 
-        return $event_id;
+        return $data['event_id'];
     }
 
     public function send($data)
